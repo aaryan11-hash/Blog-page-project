@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.aaryan.Blogger.Domain.Blogs;
 import com.aaryan.Blogger.Domain.UserInfo;
-import com.aaryan.Blogger.Service.BlogServiceImpl;
+import com.aaryan.Blogger.Helper.AuthenticationAndLogin;
+import com.aaryan.Blogger.Service.BlogService;
 
 @Controller
 @RequestMapping("/blog")
@@ -19,8 +20,10 @@ public class BlogController {
 	
 	private UserInfo userinfo;
 	
+	private AuthenticationAndLogin helper;
+	
 	@Autowired
-	BlogServiceImpl service;
+	BlogService service;
 	
 	@RequestMapping("/loginpage")
 	public String loginpage(Model model) {
@@ -30,5 +33,11 @@ public class BlogController {
 		return "loginPage";
 	}
 	
-	
+	@GetMapping("/afterlogin")
+	public String verifyLogin(@ModelAttribute("user") UserInfo user ,Model model) {
+		helper.verifiedloginUser(service.getUserList(),user);
+		if()
+		
+		
+	}
 }

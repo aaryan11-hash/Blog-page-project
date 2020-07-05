@@ -1,14 +1,23 @@
 package com.aaryan.Blogger.Service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 
-import com.aaryan.Blogger.Repository.BlogRepoImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.aaryan.Blogger.Domain.UserInfo;
+import com.aaryan.Blogger.Repository.BlogRepo;
 
 public class BlogServiceImpl implements BlogService {
 
 	@Autowired
-	private BlogRepoImpl blogdao;
+	private BlogRepo blogdao;
 	
-	
+	@Override
+	@Transactional
+	public List<UserInfo> getUserList(){
+		
+		return blogdao.getUserList();
+	}
 	
 }

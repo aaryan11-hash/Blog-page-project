@@ -15,12 +15,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="user_info")
-public class UserInfo {
+public class UserInfo implements Comparable<UserInfo> {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
+	
 	
 	@Column(name="username")
 	private String username;
@@ -63,6 +64,34 @@ public class UserInfo {
 	
 	
 	
+	public UserInfo(int usefulid, String username, String password, String firstname, String lastname, String education,
+			int age, String prefferedGenre, List<Blogs> blogsList) {
+		
+		this.usefulid = usefulid;
+		this.username = username;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.education = education;
+		this.age = age;
+		this.prefferedGenre = prefferedGenre;
+		this.blogsList = blogsList;
+	}
+
+
+
+
+
+
+	public UserInfo() {
+		
+	}
+
+
+
+
+
+
 	public int getId() {
 		return id;
 	}
@@ -150,6 +179,102 @@ public class UserInfo {
 
 	public void setBlogsList(List<Blogs> blogsList) {
 		this.blogsList = blogsList;
+	}
+
+	
+	@Override
+	public String toString() {
+		return "UserInfo [id=" + id + ", username=" + username + ", password=" + password + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", education=" + education + ", age=" + age + ", prefferedGenre="
+				+ prefferedGenre + "]";
+	}
+
+
+
+
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + age;
+		result = prime * result + ((blogsList == null) ? 0 : blogsList.hashCode());
+		result = prime * result + ((education == null) ? 0 : education.hashCode());
+		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((prefferedGenre == null) ? 0 : prefferedGenre.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+
+
+
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserInfo other = (UserInfo) obj;
+		if (age != other.age)
+			return false;
+		if (blogsList == null) {
+			if (other.blogsList != null)
+				return false;
+		} else if (!blogsList.equals(other.blogsList))
+			return false;
+		if (education == null) {
+			if (other.education != null)
+				return false;
+		} else if (!education.equals(other.education))
+			return false;
+		if (firstname == null) {
+			if (other.firstname != null)
+				return false;
+		} else if (!firstname.equals(other.firstname))
+			return false;
+		if (id != other.id)
+			return false;
+		if (lastname == null) {
+			if (other.lastname != null)
+				return false;
+		} else if (!lastname.equals(other.lastname))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (prefferedGenre == null) {
+			if (other.prefferedGenre != null)
+				return false;
+		} else if (!prefferedGenre.equals(other.prefferedGenre))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
+
+
+
+
+
+
+	@Override
+	public int compareTo(UserInfo o) {
+		return this
+		
 	}
 	
 	
