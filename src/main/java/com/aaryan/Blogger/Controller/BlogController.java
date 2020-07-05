@@ -1,5 +1,10 @@
 package com.aaryan.Blogger.Controller;
 
+import java.util.List;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +21,9 @@ import com.aaryan.Blogger.Service.BlogService;
 @RequestMapping("/blog")
 public class BlogController {
 
-	private Blogs blogs;
+	private List<Blogs> userBlogs;
+	
+	private Blogs blogRenderer;
 	
 	private UserInfo userinfo;
 	
@@ -34,10 +41,49 @@ public class BlogController {
 	}
 	
 	@GetMapping("/afterlogin")
-	public String verifyLogin(@ModelAttribute("user") UserInfo user ,Model model) {
-		helper.verifiedloginUser(service.getUserList(),user);
-		if()
+	public String verifyLogin(@ModelAttribute("user") UserInfo user ,Model model,Cookie cookie,HttpServletResponse response) {
+		int truth=helper.verifiedloginUser(service.getUserList(),user);
+		
+		if(truth==0) {
+			
+			return "redirect:/blog/loginpage";
+		}else {
+			this.userinfo=service.getUserBlogs(truth);
+			this.userBlogs=this.userinfo.getBlogsList();
+			
+			cookie=new Cookie("username",this.userinfo.getUsername());
+			cookie.setMaxAge(60*60);
+			response.addCookie(cookie);
+			
+			return "home-page";
+		}
+		
+	
 		
 		
-	}
+	
 }
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+

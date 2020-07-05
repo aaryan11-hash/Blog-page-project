@@ -24,6 +24,15 @@ public class BlogRepoImpl implements BlogRepo {
 		return finallist;
 	}
 	
+	@Override
+	public UserInfo getUserBlogs(int id) {
+		Session session=sessionFactory.getCurrentSession();
+		
+		UserInfo blogger=session.get(UserInfo.class,id);
+		blogger.getBlogsList();
+		
+		return blogger;
+	}
 	
 	
 }

@@ -20,4 +20,11 @@ public class BlogServiceImpl implements BlogService {
 		return blogdao.getUserList();
 	}
 	
+	@Override
+	@Transactional
+	public UserInfo getUserBlogs(int id){
+		
+		return blogdao.getUserBlogs(id);
+	}
+	
 }

@@ -8,5 +8,7 @@ public interface BlogService {
 
 	List<UserInfo> getUserList();
 
+	UserInfo getUserBlogs(int id);
+
 	
 }

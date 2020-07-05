@@ -67,7 +67,7 @@ public class UserInfo implements Comparable<UserInfo> {
 	public UserInfo(int usefulid, String username, String password, String firstname, String lastname, String education,
 			int age, String prefferedGenre, List<Blogs> blogsList) {
 		
-		this.usefulid = usefulid;
+		
 		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
@@ -273,7 +273,10 @@ public class UserInfo implements Comparable<UserInfo> {
 
 	@Override
 	public int compareTo(UserInfo o) {
-		return this
+		if(this.id>o.getId())
+			return 1;
+		else 
+			return -1;
 		
 	}
 	

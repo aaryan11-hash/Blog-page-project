@@ -7,11 +7,14 @@ import com.aaryan.Blogger.Domain.UserInfo;
 
 public class AuthenticationAndLogin {
 
-	public boolean verifiedloginUser(List<UserInfo> userList,UserInfo user) {
-		int  verifiedUser=Collections.binarySearch(userList,user);
+	public int verifiedloginUser(List<UserInfo> userList,UserInfo user) {
 		
-		
-		
+			for(UserInfo u:userList) {
+				if(user.getUsername()==u.getUsername() && user.getPassword()==u.getPassword())
+					return u.getId();
+			}
+	
+		return 0;
 	}
 	
 	

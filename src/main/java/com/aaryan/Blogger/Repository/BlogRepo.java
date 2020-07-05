@@ -8,4 +8,6 @@ public interface BlogRepo {
 
 	List<UserInfo> getUserList();
 
+	UserInfo getUserBlogs(int id);
+
 }
