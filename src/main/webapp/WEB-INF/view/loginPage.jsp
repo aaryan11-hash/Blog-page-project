@@ -11,6 +11,7 @@
 <form:form action="${pageContext.request.contextPath}/blog/afterlogin" method="GET" modelAttribute="user">
 
 enter username <form:input path="username"/>
+<br><br>
 enter password <form:input path="password"/>
 
 <input type="submit" value="log-in">
