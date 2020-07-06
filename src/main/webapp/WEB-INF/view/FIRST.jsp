@@ -6,8 +6,9 @@
 </head>
 <body>
 
-<a href="${pageContext.request.contextPath}/blog/loginpage">login</a>
-
+Blog it out!!<a href="${pageContext.request.contextPath}/blog/loginpage">login</a>
+<br><br>
+get Started here!!<a href="${pageContext.request.contextPath}/blog/signup">sign-up</a>
 </body>
 
 </html>

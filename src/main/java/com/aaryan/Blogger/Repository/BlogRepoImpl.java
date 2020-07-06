@@ -1,5 +1,6 @@
 package com.aaryan.Blogger.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -8,7 +9,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.aaryan.Blogger.Domain.UserInfo;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BlogRepoImpl implements BlogRepo {
 
 	@Autowired
@@ -18,10 +21,10 @@ public class BlogRepoImpl implements BlogRepo {
 	public List<UserInfo> getUserList(){
 		Session session=sessionFactory.getCurrentSession();
 		
-		Query<UserInfo> list=session.createQuery("from UserInfo");
-		List<UserInfo> finallist=list.getResultList();
 		
-		return finallist;
+		List<UserInfo> finallist=session.createQuery("from UserInfo",UserInfo.class).getResultList();
+		
+		return new ArrayList<>(finallist);
 	}
 	
 	@Override

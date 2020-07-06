@@ -12,6 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
 
 @Entity
 @Table(name="user_info")
@@ -24,28 +30,34 @@ public class UserInfo implements Comparable<UserInfo> {
 	
 	
 	@Column(name="username")
+	@Pattern(regexp ="^[a-zA-Z0-9@_]{2,15}",message="message can only contain small or All caps and only numbers!!")
 	private String username;
 	
 	@Column(name="password")
+	@Pattern(regexp ="^[a-zA-Z0-9@_]{2,15}",message="message can only contain small or All caps and only numbers!!")
 	private String password;
 	
 	@Column(name="firstname")
+	@Pattern(regexp="[a-zA-Z]{3,20}",message="name can only consist of letters!!")
 	private String firstname;
 	
 	@Column(name="lastname")
+	@Pattern(regexp="[a-zA-Z]{3,20}",message="name can only consist of letters!!")
 	private String lastname;
 	
 	@Column(name="education")
 	private String education;
 	
 	@Column(name="age")
+	@Min(value = 13,message="age limit is 13 and higher!!!")
+	@Positive(message = "value has to be positive")
 	private int age;
 	
-	@Column(name="preferred-genre")
-	private String prefferedGenre;
+	@Column(name="preferredgenre")
+	private String [] prefferedGenre;
 	
 	
-	@OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
+	@OneToMany(cascade =CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Blogs> blogsList;
 
 
@@ -65,7 +77,7 @@ public class UserInfo implements Comparable<UserInfo> {
 	
 	
 	public UserInfo(int usefulid, String username, String password, String firstname, String lastname, String education,
-			int age, String prefferedGenre, List<Blogs> blogsList) {
+			int age, String [] prefferedGenre, List<Blogs> blogsList) {
 		
 		
 		this.username = username;
@@ -78,8 +90,11 @@ public class UserInfo implements Comparable<UserInfo> {
 		this.blogsList = blogsList;
 	}
 
-
-
+	
+	public UserInfo(String username,String password) {
+		this.username=username;
+		this.password=password;
+	}
 
 
 
@@ -161,16 +176,13 @@ public class UserInfo implements Comparable<UserInfo> {
 		this.age = age;
 	}
 
-
-	public String getPrefferedGenre() {
+	public String[] getPrefferedGenre() {
 		return prefferedGenre;
 	}
 
-
-	public void setPrefferedGenre(String prefferedGenre) {
+	public void setPrefferedGenre(String []prefferedGenre) {
 		this.prefferedGenre = prefferedGenre;
 	}
-
 
 	public List<Blogs> getBlogsList() {
 		return blogsList;
