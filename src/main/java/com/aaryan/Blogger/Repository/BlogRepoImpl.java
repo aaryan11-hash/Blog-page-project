@@ -36,6 +36,14 @@ public class BlogRepoImpl implements BlogRepo {
 		
 		return blogger;
 	}
+
+	@Override
+	public void saveUser(UserInfo user){
+		Session session=sessionFactory.getCurrentSession();
+
+		session.save(user);
+
+	}
 	
 	
 }

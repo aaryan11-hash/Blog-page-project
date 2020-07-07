@@ -19,6 +19,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 
+
+
 @Entity
 @Table(name="user_info")
 public class UserInfo implements Comparable<UserInfo> {
@@ -204,81 +206,25 @@ public class UserInfo implements Comparable<UserInfo> {
 
 
 
+	@Override
+	public boolean equals(Object o) {
+		if(this==o)
+			return true;
+		
+		if((o==null) || o.getClass()!=this.getClass())
+			return false;
+		
+		String username=((UserInfo)o).getUsername();
+		return this.username.equals(username);
+		
+	}
 
-
+	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + age;
-		result = prime * result + ((blogsList == null) ? 0 : blogsList.hashCode());
-		result = prime * result + ((education == null) ? 0 : education.hashCode());
-		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((prefferedGenre == null) ? 0 : prefferedGenre.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
+		
+		return this.username.hashCode()+57;
 	}
-
-
-
-
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserInfo other = (UserInfo) obj;
-		if (age != other.age)
-			return false;
-		if (blogsList == null) {
-			if (other.blogsList != null)
-				return false;
-		} else if (!blogsList.equals(other.blogsList))
-			return false;
-		if (education == null) {
-			if (other.education != null)
-				return false;
-		} else if (!education.equals(other.education))
-			return false;
-		if (firstname == null) {
-			if (other.firstname != null)
-				return false;
-		} else if (!firstname.equals(other.firstname))
-			return false;
-		if (id != other.id)
-			return false;
-		if (lastname == null) {
-			if (other.lastname != null)
-				return false;
-		} else if (!lastname.equals(other.lastname))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (prefferedGenre == null) {
-			if (other.prefferedGenre != null)
-				return false;
-		} else if (!prefferedGenre.equals(other.prefferedGenre))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
-	}
-
-
 
 
 

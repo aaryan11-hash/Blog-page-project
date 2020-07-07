@@ -10,4 +10,5 @@ public interface BlogRepo {
 
 	UserInfo getUserBlogs(int id);
 
+	void saveUser(UserInfo user);
 }

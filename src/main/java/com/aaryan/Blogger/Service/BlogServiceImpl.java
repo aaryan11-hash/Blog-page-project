@@ -28,5 +28,15 @@ public class BlogServiceImpl implements BlogService {
 		
 		return blogdao.getUserBlogs(id);
 	}
+
+	@Override
+	@Transactional
+	public void saveUser(UserInfo user) {
+
+		blogdao.saveUser(user);
+	}
+
+
+
 	
 }

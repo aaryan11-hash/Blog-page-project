@@ -16,7 +16,7 @@ Welcome to the profile builder page!!
 Your UserName: ${username}
 <br><br>
 
-<form:form action="${pageContext.request.contextPath}/blog/profileBuilder" method="GET" modelAttribute="user">
+<form:form action="${pageContext.request.contextPath}/blog/postProcessing" method="GET" modelAttribute="user">
 
 Enter FirstName<form:input path="firstname"/>
 <form:errors path="firstname" cssClass="error"></form:errors>

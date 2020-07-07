@@ -10,5 +10,6 @@ public interface BlogService {
 
 	UserInfo getUserBlogs(int id);
 
+	void saveUser(UserInfo user);
 	
 }

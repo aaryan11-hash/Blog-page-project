@@ -53,9 +53,9 @@ public class BlogController {
 	}
 	
 	@GetMapping("/afterlogin")
-	public String verifyLogin(@ModelAttribute("user") UserInfo user ,Model model,Cookie cookie,HttpServletResponse response) {
+	public String verifyLogin(@ModelAttribute("user") UserInfo user,Model model) {
 		int truth=helper.verifiedloginUser(service.getUserList(),user);
-		
+		System.out.println("truth value:"+truth);
 		if(truth==0) {
 			
 			return "redirect:/blog/loginpage";
@@ -63,9 +63,9 @@ public class BlogController {
 			this.userinfo=service.getUserBlogs(truth);
 			this.userBlogs=this.userinfo.getBlogsList();
 			
-			cookie=new Cookie("username",this.userinfo.getUsername());
-			cookie.setMaxAge(60*60);
-			response.addCookie(cookie);
+			//cookie=new Cookie("username",this.userinfo.getUsername());
+			//cookie.setMaxAge(60*60);
+			//response.addCookie(cookie);
 			
 			model.addAttribute("username",userinfo.getUsername());
 			
@@ -114,8 +114,24 @@ public class BlogController {
 				return "redirect:/blog/signup";
 			
 		}
-		
-		
+	}
+
+	@GetMapping("/postProcessing")
+	public String savingNewUser(@Valid @ModelAttribute UserInfo userInfo,BindingResult result,Model model){
+		if(result.hasErrors()){
+			return "redirect:/blog/profileBuilder";
+		}
+		else{
+			userInfo.setUsername(this.userinfo.getUsername());
+			userInfo.setPassword(this.userinfo.getPassword());
+			this.userinfo=userInfo;
+			service.saveUser(userinfo);
+			model.addAttribute("user",this.userinfo);
+
+
+			return "home-page";
+		}
+
 	}
 }
 	
